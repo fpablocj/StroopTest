@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col">
+    <h2 style="text-align: center;">Listado de Videos</h2>
+  </div>
+</div>
+<button style="margin: 10px;" class="btn btn-danger me-md-2" type="button" routerLink="">Salir al menú <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+
+<video class="video" #video autoplay playsinline mutd [hidden]="true"></video>
+<div id="fullscreen" slot="fixed"></div>
+
+<div class="row border rounded border-success p-2 mb-4">
+  <h2 style="text-align: center;" *ngIf="videos.length==0">No hay videos guardados.</h2>
+    <table class="table table-striped" style="text-align: center;" *ngIf="videos.length>0">
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">Videos</th>
+          <th scope="col">Operaciones</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let video of videos">
+        <td>
+          {{video}}
+        </td>
+        <td>
+        <button class="btn btn-success me-md-2" type="button" (click)="play(video)" tappable>Reproducir <i class="fa-solid fa-circle-play"></i></button>
+        <button class="btn btn-danger me-md-2" type="button" (click)="deleteFile(video)">Eliminar <i class="fa-solid fa-trash-can"></i></button>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+</div>
+
+

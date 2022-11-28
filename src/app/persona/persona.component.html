@@ -1,0 +1,51 @@
+<h1>Gestión de Usuarios</h1>
+<div class="row">
+  <div class="col-6 border">
+    <div class="mb-1">
+        <label for="exampleID" class="form-label" >Ingrese ID</label>
+      <input type="number" class="form-control" id="exampleID" placeholder="" [(ngModel)]="persona.id" required>
+      <div class="fst-italic font-" style="color:red; font-size: small;">
+        {{errorID}}
+      </div>
+
+      <label for="exampleFormControlInput1" class="form-label">Ingrese Nombre</label>
+      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" [(ngModel)]="persona.nombre" required>
+      <div class="fst-italic font-" style="color:red; font-size: small;">
+      {{errorNombre}}
+      </div>
+      </div>
+
+  <div class="row">
+    <div class="col-10">
+      <button type="text" class="btn btn-primary" (click)="guardar()"> Guardar </button>
+    </div>
+    <div class="col-1">
+      <button type="text" class="btn btn-danger" routerLink=""> Salir </button>
+    </div>
+  </div>
+
+  </div>
+
+    <div class="col-6">
+    <table class="table table-info table-striped" style="text-align: center;" *ngIf="personasGuardadas.length>0">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let persona of personasGuardadas">
+          <th scope="row">{{persona.id}}</th>
+          <td>{{persona.nombre}}</td>
+          <td>
+          <button type="button" class="btn btn-danger" (click)="eliminar(persona.id)">Eliminar</button>
+          <button type="button" class="btn btn-success" (click)="actualizar(persona.id)" [disabled]="!estado">Actualizar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

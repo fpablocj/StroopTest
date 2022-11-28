@@ -1,0 +1,473 @@
+<div class="modal-dialog border rounded border-success p-1 mb-2" style="margin: 15%;" *ngIf="cerrar==true">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h5 style="text-align: center;" class="modal-title">Ingrese su nombre</h5>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" [(ngModel)]="nombre">
+        <div class="fst-italic font-" style="color:red; font-size: small;">
+          {{error}}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="v()">Aceptar <i class="fa-solid fa-check"></i></button>
+          <button class="btn btn-danger me-md-2" type="button" routerLink="">Salir al menú <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+      </div>
+      </div>
+    </div>
+  </div>
+<div class="container" *ngIf="cerrar == false">
+  <h4 style="text-align: center;">TEST N° {{pantalla}}/4</h4>
+  <p class="border rounded border-success p-1 mb-2" *ngIf="comenzar==false" style="text-align: justify;"><b>Instrucciones:</b> Mire directamente a la pantalla, pulse el botón Comenzar y a
+    continuación lea en vos alta y en tono fluido la palabra o el número del siguiente listado,
+  durante los proximos 45 segundos, una vez finalizada la lectura pulse el botón "Siguiente Test" para avanzar a la siguiente prueba.
+En caso de terminarse el tiempo, se avanzará automáticamente al siguiente test.</p>
+
+<ng-template #contenido let-modal>
+    <div class="modal-content">
+      <div class="modal-body">
+        <h5 style="text-align: center;" class="modal-title">{{mensaje}}</h5>
+      </div>
+      <div class="modal-footer">
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button type="button" class="btn btn-warning" (click)="modal.close()" routerLink="/lista">{{opcion}}</button>
+          <button *ngIf="pantalla==4" type="button" class="btn btn-danger" (click)="modal.close()" routerLink="">Salir al menú <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+        </div>
+      </div>
+    </div>
+</ng-template>
+
+<ng-template #contenido2 let-modal>
+  <div class="modal-content">
+    <div class="modal-body">
+      <h1 style="text-align: center; background-color: yellow;" class="modal-title">Iniciando test... <br> {{cuentai}}</h1>
+    </div>
+  </div>
+</ng-template>
+<ng-template #contenido3 let-modal>
+  <div class="modal-content">
+    <div class="modal-body">
+      <h5 style="text-align: center;" class="modal-title">¡Test N°{{namefile}} guardado con éxito!</h5>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <button type="button" class="btn btn-success" (click)="modal.close()">Continuar</button>
+    </div>
+  </div>
+</ng-template>
+
+<div class="row h6 pb-2 mb-2">
+    <div class="col-9 d-grid gap-4 d-md-flex justify-content-md-end">
+      <div class="btn btn-warning me-md-2" style="text-align:center; color: white;"><i class="fa-solid fa-hourglass-start"></i>Tiempo: {{cuenta}}
+    </div>
+    <button class="btn btn-primary me-md-2" type="button" [disabled]="comenzar" (click)="contar(contenido, contenido2, contenido3)">Comenzar <i class="fa-solid fa-play"></i></button>
+    <button class="btn btn-success me-md-2" type="button" (click)="disp(contenido, contenido3)" [disabled]="siguiente">
+      {{next}} <i class="fa-solid fa-arrow-right"></i>
+    </button>
+    <button class="btn btn-danger me-md-2" type="button" routerLink="">Salir al menú <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+    </div>
+  </div>
+  <video class="video" #video autoplay playsinline mutd [hidden]="true"></video>
+  <div id="fullscreen" slot="fixed"></div>
+
+
+  <div class="row">
+
+    <div class="col border rounded border-success p-1 mb-2">
+        <table *ngIf="pantalla==1" class="table table-borderless" style="border-collapse: separate; border-spacing: 100px 15px;" >
+          <tr>
+           <td>2</td>
+           <td>26</td>
+           <td>1</td>
+           <td>25</td>
+           <td>72</td>
+           <td>71</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>28</td>
+            <td>3</td>
+            <td>27</td>
+            <td>70</td>
+            <td>69</td>
+           </tr>
+           <tr>
+            <td>6</td>
+            <td>30</td>
+            <td>5</td>
+            <td>29</td>
+            <td>68</td>
+            <td>67</td>
+           </tr>
+           <tr>
+            <td>8</td>
+            <td>32</td>
+            <td>7</td>
+            <td>31</td>
+            <td>66</td>
+            <td>65</td>
+           </tr>
+           <tr>
+            <td>10</td>
+            <td>34</td>
+            <td>9</td>
+            <td>33</td>
+            <td>64</td>
+            <td>63</td>
+           </tr>
+           <tr>
+            <td>12</td>
+            <td>36</td>
+            <td>11</td>
+            <td>35</td>
+            <td>62</td>
+            <td>61</td>
+           </tr>
+           <tr>
+            <td>14</td>
+            <td>38</td>
+            <td>13</td>
+            <td>37</td>
+            <td>60</td>
+            <td>59</td>
+           </tr>
+           <tr>
+            <td>16</td>
+            <td>40</td>
+            <td>15</td>
+            <td>39</td>
+            <td>58</td>
+            <td>57</td>
+           </tr>
+           <tr>
+            <td>18</td>
+            <td>42</td>
+            <td>17</td>
+            <td>41</td>
+            <td>56</td>
+            <td>55</td>
+           </tr>
+           <tr>
+            <td>20</td>
+            <td>44</td>
+            <td>19</td>
+            <td>43</td>
+            <td>54</td>
+            <td>53</td>
+           </tr>
+           <tr>
+            <td>22</td>
+            <td>46</td>
+            <td>21</td>
+            <td>45</td>
+            <td>52</td>
+            <td>51</td>
+           </tr>
+           <tr>
+            <td>24</td>
+            <td>48</td>
+            <td>23</td>
+            <td>47</td>
+            <td>50</td>
+            <td>49</td>
+           </tr>
+        </table>
+
+        <table *ngIf="pantalla==2" class="table table-borderless" style="border-collapse: separate; border-spacing: 20px 15px;" >
+        <tr>
+         <td>Dos</td>
+         <td>Veintiséis</td>
+         <td>Uno</td>
+         <td>Veinticinco</td>
+         <td>Setenta y dos</td>
+         <td>Setenta y uno</td>
+        </tr>
+        <tr>
+          <td>Cuatro</td>
+          <td>Veintiocho</td>
+          <td>Tres</td>
+          <td>Veintisiete</td>
+          <td>Setenta</td>
+          <td>Sesenta y nueve</td>
+         </tr>
+         <tr>
+          <td>Seis</td>
+          <td>Treinta</td>
+          <td>Cinco</td>
+          <td>Veintinueve</td>
+          <td>Sesenta y ocho</td>
+          <td>Sesenta y siete</td>
+         </tr>
+         <tr>
+          <td>Ocho</td>
+          <td>Treinta y dos</td>
+          <td>Siete</td>
+          <td>Treinta y uno</td>
+          <td>Sesenta y séis</td>
+          <td>Sesenta y cinco</td>
+         </tr>
+         <tr>
+          <td>Diez</td>
+          <td>Treinta y cuatro</td>
+          <td>Nueve</td>
+          <td>Treinta y tres</td>
+          <td>Sesenta y cuatro</td>
+          <td>Sesenta y tres</td>
+         </tr>
+         <tr>
+          <td>Doce</td>
+          <td>Treinta y séis</td>
+          <td>Once</td>
+          <td>Treinta y cinco</td>
+          <td>Sesenta y dos</td>
+          <td>Sesenta y uno</td>
+         </tr>
+         <tr>
+          <td>Catorce</td>
+          <td>Treinta y ocho</td>
+          <td>Trece</td>
+          <td>Treinta y siete</td>
+          <td>Sesenta</td>
+          <td>Cincuenta y nueve</td>
+         </tr>
+         <tr>
+          <td>Dieciséis</td>
+          <td>Cuarenta</td>
+          <td>Quince</td>
+          <td>Treinta y nueve</td>
+          <td>Cincuenta y ocho</td>
+          <td>Cincuenta y siete</td>
+         </tr>
+         <tr>
+          <td>Dieciocho</td>
+          <td>Cuarenta y dos</td>
+          <td>Diecisiete</td>
+          <td>Cuarenta y uno</td>
+          <td>Cincuenta y séis</td>
+          <td>Ciencuenta y cinco</td>
+         </tr>
+         <tr>
+          <td>Veinte</td>
+          <td>Cuarenta y cuatro</td>
+          <td>Diecinueve</td>
+          <td>Cuarenta y tres</td>
+          <td>Cincuenta y cuatro</td>
+          <td>Cincuenta y tres</td>
+         </tr>
+         <tr>
+          <td>Veinte y dos</td>
+          <td>Cuarenta y séis</td>
+          <td>Veintiuno</td>
+          <td>Cuarenta y cinco</td>
+          <td>Cincuenta y dos</td>
+          <td>Cincuenta y uno</td>
+         </tr>
+         <tr>
+          <td>Veinte y cuatro</td>
+          <td>Cuarenta y ocho</td>
+          <td>Veintitres</td>
+          <td>Cuarenta y siete</td>
+          <td>Cincuenta</td>
+          <td>Cuarenta y nueve</td>
+         </tr>
+        </table>
+
+        <table *ngIf="pantalla==3" class="table table-borderless" style="border-collapse: separate; border-spacing: 20px 15px;" >
+          <tr>
+           <td>2 Dos</td>
+           <td>26 Veintiséis</td>
+           <td>1 Uno</td>
+           <td>28 Veinticinco</td>
+           <td>72 Setenta y dos</td>
+           <td>71 Setenta y uno</td>
+          </tr>
+          <tr>
+            <td>4 Cuatro</td>
+            <td>28 Veintiocho</td>
+            <td>3 Tres</td>
+            <td>27 Veintisiete</td>
+            <td>70 Setenta</td>
+            <td>69 Sesenta y nueve</td>
+           </tr>
+           <tr>
+            <td>6 Seis</td>
+            <td>30 Treinta</td>
+            <td>5 Cinco</td>
+            <td>29 Veintinueve</td>
+            <td>68 Sesenta y ocho</td>
+            <td>67 Sesenta y siete</td>
+           </tr>
+           <tr>
+            <td>8 Ocho</td>
+            <td>32 Treinta y dos</td>
+            <td>7 Siete</td>
+            <td>31 Treinta y uno</td>
+            <td>66 Sesenta y séis</td>
+            <td>65 Sesenta y cinco</td>
+           </tr>
+           <tr>
+            <td>10 Diez</td>
+            <td>34 Treinta y cuatro</td>
+            <td>9 Nueve</td>
+            <td>33 Treinta y tres</td>
+            <td>64 Sesenta y cuatro</td>
+            <td>63 Sesenta y tres</td>
+           </tr>
+           <tr>
+            <td>12 Doce</td>
+            <td>36 Treinta y séis</td>
+            <td>11 Once</td>
+            <td>35 Treinta y cinco</td>
+            <td>62 Sesenta y dos</td>
+            <td>61 Sesenta y uno</td>
+           </tr>
+           <tr>
+            <td>14 Catorce</td>
+            <td>38 Treinta y ocho</td>
+            <td>13 Trece</td>
+            <td>37 Treinta y siete</td>
+            <td>60 Sesenta</td>
+            <td>59 Cincuenta y nueve</td>
+           </tr>
+           <tr>
+            <td>16 Dieciséis</td>
+            <td>40 Cuarenta</td>
+            <td>15 Quince</td>
+            <td>39 Treinta y nueve</td>
+            <td>58 Cincuenta y ocho</td>
+            <td>57 Cincuenta y siete</td>
+           </tr>
+           <tr>
+            <td>18 Dieciocho</td>
+            <td>42 Cuarenta y dos</td>
+            <td>17 Diecisiete</td>
+            <td>41 Cuarenta y uno</td>
+            <td>56 Cincuenta y séis</td>
+            <td>55 Ciencuenta y cinco</td>
+           </tr>
+           <tr>
+            <td>20 Veinte</td>
+            <td>44 Cuarenta y cuatro</td>
+            <td>19 Diecinueve</td>
+            <td>43 Cuarenta y tres</td>
+            <td>54 Cincuenta y cuatro</td>
+            <td>53 Cincuenta y tres</td>
+           </tr>
+           <tr>
+            <td>22 Veinte y dos</td>
+            <td>46 Cuarenta y séis</td>
+            <td>21 Veintiuno</td>
+            <td>45 Cuarenta y cinco</td>
+            <td>52 Cincuenta y dos</td>
+            <td>51 Cincuenta y uno</td>
+           </tr>
+           <tr>
+            <td>24 Veinte y cuatro</td>
+            <td>48 Cuarenta y ocho</td>
+            <td>23 Veintitres</td>
+            <td>47 Cuarenta y siete</td>
+            <td>50 Cincuenta</td>
+            <td>49 Cuarenta y nueve</td>
+           </tr>
+          </table>
+
+        <table *ngIf="pantalla==4" class="table table-borderless" style="border-collapse: separate; border-spacing: 10px 15px;" >
+        <tr>
+         <td>cinco 1</td>
+         <td>5 nueve</td>
+         <td>Treinta tres 32</td>
+         <td>11 seis</td>
+         <td>Seis 18</td>
+         <td>25 treinta</td>
+        </tr>
+        <tr>
+          <td>3 quince</td>
+          <td>seis 49</td>
+          <td>52 sesenta</td>
+          <td>Setenta y dos 7</td>
+          <td>5 treinta</td>
+          <td>Sesenta y dos 2</td>
+         </tr>
+         <tr>
+          <td>siete 12</td>
+          <td>Noventa 8</td>
+          <td>cuarenta 41</td>
+          <td>Treinta 55</td>
+          <td>3 nueve</td>
+          <td>63 doce</td>
+         </tr>
+         <tr>
+          <td>4 Ocho</td>
+          <td>100 cuatro</td>
+          <td>14 diez</td>
+          <td>Treinta 33</td>
+          <td>15 veintidós </td>
+          <td>Treinta 13</td>
+         </tr>
+         <tr>
+          <td>8 nueve</td>
+          <td>41 treinta</td>
+          <td>7 sesenta y nueve </td>
+          <td>Veintidós 29</td>
+          <td>30 seis</td>
+          <td>setenta y dos 84</td>
+         </tr>
+         <tr>
+          <td>Trece 5</td>
+          <td>Ochenta y uno 1</td>
+          <td>Veintiséis 28 </td>
+          <td>62 setenta</td>
+          <td>Nueve 78</td>
+          <td>10 catorce</td>
+         </tr>
+         <tr>
+          <td>25 cien</td>
+          <td>30 sesenta y tres</td>
+          <td>13 ochenta y uno </td>
+          <td>10 cinco</td>
+          <td>Veinte 32</td>
+          <td>Cincuenta 20</td>
+         </tr>
+         <tr>
+          <td>89 Trece</td>
+          <td>Trece 25</td>
+          <td>33 treinta y nueve</td>
+          <td>dos 3</td>
+          <td>8 once</td>
+          <td>veinte 16</td>
+         </tr>
+         <tr>
+          <td>10 tres</td>
+          <td>14 cuarenta</td>
+          <td>12 noventa</td>
+          <td>Cincuenta 53</td>
+          <td>Ocho 71</td>
+          <td>Treinta y cinco 49</td>
+         </tr>
+         <tr>
+          <td>4 veinticuatro</td>
+          <td>Cien 10</td>
+          <td>Ochenta y seis 33</td>
+          <td>86 noventa</td>
+          <td>96 ochenta y siete</td>
+          <td>30 ochenta</td>
+         </tr>
+         <tr>
+          <td>Ocho 71</td>
+          <td>Quince 16</td>
+          <td>Treinta y cinco 49</td>
+          <td>20 treinta</td>
+          <td>9 ocho</td>
+          <td>8 seis</td>
+         </tr>
+         <tr>
+          <td>65 setenta</td>
+          <td>Nueve 6</td>
+          <td>Setenta y tres 45</td>
+          <td>19 cuarenta</td>
+          <td>Ochenta y seis 33</td>
+          <td>Uno 7</td>
+         </tr>
+        </table>
+    </div>
+</div>
