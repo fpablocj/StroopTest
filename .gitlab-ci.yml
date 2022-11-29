@@ -20,4 +20,4 @@ loadtest-local:
     stage: loadtests-local
     script:
         - echo "executing local k6 in conteiner"
-        - k6 run .loadtests/performance-test.js
+        - k6 run .loadtest/performance-test.js
