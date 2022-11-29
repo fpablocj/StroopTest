@@ -1,23 +1,48 @@
 stages:
     - build
+    - run
+    - test
+    - loadtest-local
     - deploy
-    - loadtests-local
 
-build-job:
+image: ubuntu:latest
+
+build:
     stage: build
     script:
-        - echo "building"
+        - echo "building my application in ubuntu container"
+
+run-job:
+    stage: run
+    script:
+        - echo "ejecutando app"
+
+test-job1:
+  stage: test
+  script:
+    - echo "This job tests something"
+
+test-job2:
+  stage: test
+  script:
+    - echo "After the echo commands complete, it runs the sleep command for 20 seconds"
+
+loadtest-local:
+    stage: loadtest-local
+    script:
+        - echo "executing local k6"
+
+loadtest-local1:
+    image:
+        name: loadimpact/k6:latest
+        entrypoint: ['']
+    stage: loadtest-local
+    script:
+        - echo "executing local k6"
+        - k6 run ./loadtest/performance-test.js
+
 
 deploy:
     stage: deploy
     script:
-        - echo "building"
-
-loadtest-local:
-    image:
-        name: loadimpact/k6:latest
-        entrypoint: ['']
-    stage: loadtests-local
-    script:
-        - echo "executing local k6 in conteiner"
-        - k6 run .loadtest/performance-test.js
+        - echo "deploy my application in ubuntu container"
