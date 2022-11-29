@@ -1,0 +1,23 @@
+stages:
+    - build
+    - deploy
+    - loadtests-local
+
+build-job:
+    stage: build
+    script:
+        - echo "building"
+
+deploy:
+    stage: deploy
+    script:
+        - echo "building"
+
+loadtest-local:
+    image:
+        name: loadimpact/k6:latest
+        entrypoint: ['']
+    stage: loadtests-local
+    script:
+        - echo "executing local k6 in conteiner"
+        - k6 run .loadtests/performance-test.js
