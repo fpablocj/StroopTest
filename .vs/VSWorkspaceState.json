@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\lista",
+    "\\src\\app\\tests"
   ],
-  "SelectedNode": "\\C:\\Users\\ASUS\\Desktop\\trabajos Visual code\\examenFinal",
+  "SelectedNode": "\\src\\app\\tests\\tests.component.html",
   "PreviewInSolutionExplorer": false
 }
